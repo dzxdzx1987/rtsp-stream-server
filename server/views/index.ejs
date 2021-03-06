@@ -2,10 +2,49 @@
 <html>
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script type="text/javascript" src="/js/jsmpeg.min.js"></script>
   </head>
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+    <!--<div id="main_frame"><canvas id="video-canvas"></canvas></div>
+    <div><button id="play" onclick="playStream()">requestServerRun</button></div> -->
+
+    <div><canvas id="video-canvas"></canvas></div>
+    <script type="text/javascript">
+      var canvas = document.getElementById('video-canvas');
+      var hostname = document.location.hostname;
+      var wsUrl = 'ws://' + hostname + ':9999/';
+      var player = new JSMpeg.Player(wsUrl, {canvas: canvas});
+      
+      /*var canvas = document.getElementById('video-canvas');
+      var hostname = document.location.hostname;
+      var wsUrl = 'ws://' + hostname + ':9999/';
+      var apiUrl = 'http://' + hostname + ':3000/playStream';
+
+      function playStream () {
+        var frame = document.getElementById('main_frame');
+        frame.style.backgroundColor = 'transparent';
+        requestServerPlayStream();
+        var player = new JSMpeg.Player(wsUrl, {canvas: canvas});
+      }
+
+      function requestServerPlayStream () {
+        var xhr = null;
+        if (window.XMLHttpRequest) {
+          xhr = new XMLHttpRequest();
+        } else {
+          var request = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        xhr.open('GET', apiUrl, true);
+        xhr.send();
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText)
+          }
+        }
+      }*/
+    </script>
   </body>
 </html>

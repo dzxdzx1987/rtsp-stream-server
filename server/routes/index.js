@@ -1,8 +1,9 @@
 var express = require('express');
 var router = express.Router();
 var Stream = require('node-rtsp-stream');
+var streamObj = null;
 
-var streamObj = new Stream({
+/*var streamObj = new Stream({
   name: 'name',
   streamUrl: 'rtsp://nextk.synology.me/vod/fa_test',
   wsPort: 9999,
@@ -14,7 +15,7 @@ var streamObj = new Stream({
 
 streamObj.on('exitWithError', () => {
   streamObj.stop();
-});
+});*/
 
 
 /* GET home page. */
@@ -23,8 +24,12 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'RTSP Stream Demo' });
 });
 
-/*router.get('/playStream', function(req, res, next) {
-  var streamObj = new Stream({
+router.get('/manage', function(req, res, next) {
+  res.render('management', { title: 'RTSP Stream Demo' });
+});
+
+router.get('/playStream', function(req, res, next) {
+  streamObj = new Stream({
     name: 'name',
     streamUrl: 'rtsp://nextk.synology.me/vod/fa_test',
     wsPort: 9999,
@@ -39,6 +44,6 @@ router.get('/', function(req, res, next) {
   });
   
   res.write('OK');
-});*/
+});
 
 module.exports = router;

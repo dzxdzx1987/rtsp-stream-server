@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script type="text/javascript" src="/js/jsmpeg.min.js"></script>
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <div><button id="play" onclick="requestServerPlayStream()">requestServerRun</button></div> -->
+
+    <script type="text/javascript">
+      var hostname = document.location.hostname;
+      var apiUrl = 'http://' + hostname + ':3000/playStream';
+
+      function requestServerPlayStream () {
+        var xhr = null;
+        if (window.XMLHttpRequest) {
+          xhr = new XMLHttpRequest();
+        } else {
+          var request = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        xhr.open('GET', apiUrl, true);
+        xhr.send();
+        xhr.onreadystatechange = function(){
+          if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText)
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
